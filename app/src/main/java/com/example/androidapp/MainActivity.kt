@@ -24,18 +24,23 @@ class MainActivity : ComponentActivity() {
                     fullName = "Suraj Pokhrel",
                     studentId = "1541823",
                     onExplicitClick = {
-                        // Explicit Intent
+                        // Explicit Intent to launch SecondActivity
                         val explicitIntent = Intent(this, SecondActivity::class.java)
                         startActivity(explicitIntent)
                     },
                     onImplicitClick = {
-                        // Implicit Intent with custom action
+                        // Implicit Intent to launch SecondActivity with custom action
                         val implicitIntent = Intent("com.example.androidapp.ACTION_SHOW_SECOND").apply {
                             addCategory(Intent.CATEGORY_DEFAULT)
                         }
                         if (implicitIntent.resolveActivity(packageManager) != null) {
                             startActivity(implicitIntent)
                         }
+                    },
+                    onViewImageClick = {
+                        // Explicit Intent to launch ThirdActivity
+                        val viewImageIntent = Intent(this, ThirdActivity::class.java)
+                        startActivity(viewImageIntent)
                     }
                 )
             }
@@ -48,7 +53,8 @@ fun MainScreen(
     fullName: String,
     studentId: String,
     onExplicitClick: () -> Unit,
-    onImplicitClick: () -> Unit
+    onImplicitClick: () -> Unit,
+    onViewImageClick: () -> Unit // New callback for launching ThirdActivity
 ) {
     Scaffold { paddingValues ->
         Column(
@@ -58,9 +64,17 @@ fun MainScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Full Name: $fullName", style = MaterialTheme.typography.headlineLarge, color=Color.Black)
+            Text(
+                text = "Full Name: $fullName",
+                style = MaterialTheme.typography.headlineLarge,
+                color = Color.Black
+            )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Student ID: $studentId", style = MaterialTheme.typography.headlineLarge, color= Color.Blue)
+            Text(
+                text = "Student ID: $studentId",
+                style = MaterialTheme.typography.headlineLarge,
+                color = Color.Blue
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = onExplicitClick,
@@ -74,6 +88,13 @@ fun MainScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Start Activity Implicitly")
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = onViewImageClick,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "View Image Activity")
             }
         }
     }

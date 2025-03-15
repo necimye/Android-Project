@@ -1,4 +1,5 @@
 package com.example.androidapp
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +21,7 @@ class SecondActivity : ComponentActivity() {
             AndroidAppTheme {
                 SecondScreen(
                     onMainActivityClick = {
-                        // Return to the main activity (finish this activity)
+                        // Return to the MainActivity by finishing this activity
                         finish()
                     }
                 )
@@ -41,7 +42,7 @@ fun SecondScreen(onMainActivityClick: () -> Unit) {
             Text(
                 text = "Mobile Software Engineering Challenges:",
                 style = MaterialTheme.typography.headlineLarge,
-                color= Color.Blue
+                color = Color.Blue
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "1. Software Security")
