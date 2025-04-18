@@ -2,8 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Define custom permission -->
+    <permission
+        android:name="com.example.androidapp.MSE412"
+        android:protectionLevel="dangerous" />
+
+    <!-- Declare usage of the custom permission -->
+    <uses-permission android:name="com.example.androidapp.MSE412" />
+
     <!-- we need this only if we require explicit camera permission -->
-<!--     <uses-permission android:name="android.permission.CAMERA" />-->
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
 
     <application
         android:allowBackup="true"
@@ -16,10 +24,11 @@
         android:theme="@style/Theme.AndroidApp"
         tools:targetApi="31">
 
-        <!-- SecondActivity with an intent filter for implicit intents -->
+        <!-- SecondActivity with custom permission -->
         <activity
             android:name=".SecondActivity"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.example.androidapp.MSE412">
             <intent-filter>
                 <action android:name="com.example.androidapp.ACTION_SHOW_SECOND" />
                 <category android:name="android.intent.category.DEFAULT" />
